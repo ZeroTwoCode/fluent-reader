@@ -4,7 +4,7 @@ import { Icon } from "@fluentui/react/lib/Icon"
 import { Nav, INavLink, INavLinkGroup } from "office-ui-fabric-react/lib/Nav"
 import { SourceGroup } from "../schema-types"
 import { SourceState, RSSSource } from "../scripts/models/source"
-import { ALL } from "../scripts/models/feed"
+import { ALL, STARRED } from "../scripts/models/feed"
 import { AnimationClassNames, Stack, FocusZone } from "@fluentui/react"
 
 export type MenuProps = {
@@ -19,6 +19,7 @@ export type MenuProps = {
     allArticles: (init?: boolean) => void,
     selectSourceGroup: (group: SourceGroup, menuKey: string) => void,
     selectSource: (source: RSSSource) => void,
+    starredArticles: (init?: boolean) => void
     groupContextMenu: (sids: number[], event: React.MouseEvent) => void,
     updateGroupExpansion: (event: React.MouseEvent<HTMLElement>, key: string, selected: string) => void,
     toggleSearch: () => void,
@@ -45,6 +46,14 @@ export class Menu extends React.Component<MenuProps> {
                     key: ALL,
                     icon: "TextDocument",
                     onClick: () => this.props.allArticles(this.props.selected !== ALL),
+                    url: null
+                },
+                {
+                    name: intl.get("starredArticles"),
+                    ariaLabel: intl.get("starredArticles") + " ", //Just show blank for number of articles until proper count is implemented
+                    key: STARRED,
+                    icon: "FavoriteStarFill",
+                    onClick: () => this.props.starredArticles(this.props.selected !== STARRED),
                     url: null
                 }
             ]

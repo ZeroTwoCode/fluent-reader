@@ -15,7 +15,7 @@ export const APPLY_FILTER = "APPLY_FILTER"
 export const TOGGLE_SEARCH = "TOGGLE_SEARCH"
 
 export enum PageType {
-    AllArticles, Sources, Page
+    AllArticles, StarredArticles, Sources, Page
 }
 
 interface SelectPageAction {
@@ -63,6 +63,18 @@ export function selectAllArticles(init = false): AppThunk {
             keepMenu: getWindowBreakpoint(),
             filter: getState().page.filter,
             pageType: PageType.AllArticles,
+            init: init
+        } as PageActionTypes)
+    }
+}
+
+export function selectStarredArticles(init = false): AppThunk {
+    return (dispatch, getState) => {
+        dispatch({
+            type: SELECT_PAGE,
+            keepMenu: getWindowBreakpoint(),
+            filter: getState().page.filter,
+            pageType: PageType.StarredArticles,
             init: init
         } as PageActionTypes)
     }
@@ -250,6 +262,11 @@ export function pageReducer(
         case SELECT_PAGE:
             switch (action.pageType) {
                 case PageType.AllArticles: return {
+                    ...state,
+                    feedId: ALL,
+                    itemId: null
+                }
+                case PageType.StarredArticles: return {
                     ...state,
                     feedId: ALL,
                     itemId: null

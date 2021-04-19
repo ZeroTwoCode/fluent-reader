@@ -2,7 +2,7 @@ import intl from "react-intl-universal"
 import { INIT_SOURCES, SourceActionTypes, ADD_SOURCE, UPDATE_SOURCE, DELETE_SOURCE, initSources, SourceOpenTarget, updateFavicon } from "./source"
 import { RSSItem, ItemActionTypes, FETCH_ITEMS, fetchItems } from "./item"
 import { ActionStatus, AppThunk, getWindowBreakpoint, initTouchBarWithTexts } from "../utils"
-import { INIT_FEEDS, FeedActionTypes, ALL, initFeeds } from "./feed"
+import { INIT_FEEDS, FeedActionTypes, ALL, STARRED, initFeeds } from "./feed"
 import { SourceGroupActionTypes, UPDATE_SOURCE_GROUP, ADD_SOURCE_TO_GROUP, DELETE_SOURCE_GROUP, REMOVE_SOURCE_FROM_GROUP, REORDER_SOURCE_GROUPS, fixBrokenGroups } from "./group"
 import { PageActionTypes, SELECT_PAGE, PageType, selectAllArticles, showItemFromId } from "./page"
 import { getCurrentLocale } from "../settings"
@@ -453,6 +453,12 @@ export function appReducer(
                     menu: state.menu && action.keepMenu,
                     menuKey: ALL,
                     title: intl.get("allArticles")
+                }
+                case PageType.StarredArticles: return {
+                    ...state,
+                    menu: state.menu && action.keepMenu,
+                    menuKey: STARRED,
+                    title: intl.get("starredArticles")
                 }
                 case PageType.Sources: return {
                     ...state,

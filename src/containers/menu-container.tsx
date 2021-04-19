@@ -5,7 +5,7 @@ import { Menu } from "../components/menu"
 import { toggleMenu, openGroupMenu } from "../scripts/models/app"
 import { toggleGroupExpansion } from "../scripts/models/group"
 import { SourceGroup } from "../schema-types"
-import { selectAllArticles, selectSources, toggleSearch } from "../scripts/models/page"
+import { selectAllArticles, selectStarredArticles, selectSources, toggleSearch, switchFilter } from "../scripts/models/page"
 import { ViewType } from "../schema-types"
 import { initFeeds } from "../scripts/models/feed"
 import { RSSSource } from "../scripts/models/source"
@@ -33,6 +33,10 @@ const mapDispatchToProps = dispatch => ({
     toggleMenu: () => dispatch(toggleMenu()),
     allArticles: (init = false) => {
         dispatch(selectAllArticles(init)),
+        dispatch(initFeeds())
+    },
+    starredArticles: (init = false) => {
+        dispatch(selectStarredArticles(init)),
         dispatch(initFeeds())
     },
     selectSourceGroup: (group: SourceGroup, menuKey: string) => {

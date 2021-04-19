@@ -10,6 +10,12 @@
 </p>
 <hr />
 
+## Changes from base build
+### Added starred articles page
+- This page automatically applies a filter
+- There is a known issue that if you add extra filters whilst on this page it will act unpredictably
+- There is no count implemented to display the number of starred articles
+
 ## Download
 
 For Windows 10 users, the recommended way of installation is through [Microsoft Store](https://www.microsoft.com/store/apps/9P71FC94LRH8?cid=github). 

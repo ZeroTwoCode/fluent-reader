@@ -74,6 +74,7 @@ export class FeedFilter {
 }
 
 export const ALL = "ALL"
+export const STARRED = "STARRED"
 export const SOURCE = "SOURCE"
 
 const LOAD_QUANTITY = 50
@@ -397,6 +398,14 @@ export function feedReducer(
                         ...state[ALL],
                         loaded: false,
                         filter: action.filter
+                    }
+                } : state
+                case PageType.StarredArticles: return action.init ? {
+                    ...state,
+                    [ALL]: {
+                        ...state[ALL],
+                        loaded: false,
+                        filter: new FeedFilter(FilterType.StarredOnly)
                     }
                 } : state
                 default: return state
